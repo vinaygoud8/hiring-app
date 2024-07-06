@@ -4,7 +4,6 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_TOKEN = credentials('githubsecret')
-	GIT_HUB_TOKEN = credentials('hubsecret')
     }
 
     stages {
