@@ -30,7 +30,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/maksoft121/Hiring-app-argocd.git'
             }
         }
-        stage('Update K8S manifest & push to Repo') {
+    	 stage('Update K8S manifest & push to Repo') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'Github_server', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -40,8 +40,7 @@ pipeline {
                         cat dev/deployment.yaml
                         git add dev/deployment.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
-                        git push https://${hubsecret}@github.com/maksoft121/Hiring-app-argocd.git main
+			git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/maksoft121/Hiring-app-argocd.git main
                         '''
                     }
                 }
