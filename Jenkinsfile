@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_TOKEN = credentials('githubsecret')
-	DOCKER_HUB_TOKEN = credentials('hubsecret')
+	GIT_HUB_TOKEN = credentials('hubsecret')
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Checkout K8S manifest SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/betawins/Hiring-app-argocd.git'
+                git branch: 'main', url: 'https://github.com/maksoft121/Hiring-app-argocd.git'
             }
         }
         stage('Update K8S manifest & push to Repo') {
