@@ -3,6 +3,7 @@ pipeline {
 
         environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
+  DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
     }
 
     stages {
