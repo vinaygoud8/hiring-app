@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_HUB_TOKEN = credentials('githubsecret')
+	DOCKER_HUB_TOKEN = credentials('hubsecret')
     }
 
     stages {
@@ -40,7 +41,7 @@ pipeline {
                         git add dev/deployment.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/maksoft121/Hiring-app-argocd.git main
+                        git push https://${hubsecret}@github.com/maksoft121/Hiring-app-argocd.git main
                         '''
                     }
                 }
