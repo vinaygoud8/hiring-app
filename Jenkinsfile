@@ -15,7 +15,7 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'docker-hub-token', variable: 'DOCKER_HUB_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'githubsecret', variable: 'githubsecret')]) {
                         sh '''
                         echo $DOCKER_HUB_TOKEN | docker login -u maksoft121 --password-stdin
                         docker push maksoft121/hiring-app:${IMAGE_TAG}
