@@ -35,11 +35,12 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'Github_server', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
-                        cat dev/deployment.yaml
-                        sed -i "s/5/${IMAGE_TAG}/g" dev/deployment.yaml
-                        cat dev/deployment.yaml
-                        git add dev/deployment.yaml
+                        cat /var/lib/jenkins/workspace/$JOB_NAME/dev/deployment.yaml
+                        sed -i "s/5/${BUILD_NUMBER}/g" /var/lib/jenkins/workspace/$JOB_NAME/dev/deployment.yaml
+                        cat /var/lib/jenkins/workspace/$JOB_NAME/dev/deployment.yaml
+                        git add .
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git remote -v
 			git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/maksoft121/Hiring-app-argocd.git main
                         '''
                     }
